@@ -2,17 +2,13 @@ import { Component  } from "react";
 import { ContactForm, FilterForm, Section, ContactList } from "."
 
 export class App extends Component {
-  constructor (props) {
-    super(props)
-
-    this.state = {
-      contacts: [
-        {id: 'id-1', name: 'Misjko Lutij', number: '555-15-15'},
-        {id: 'id-2', name: 'Antonio Linuvui', number: '444-14-14'},
-        {id: 'id-3', name: 'Marusia Nechemna', number: '666-55-44'},
-      ],
-      filter: '',
-    }
+  state = {
+    contacts: [
+      {id: 'id-1', name: 'Misjko Lutij', number: '555-15-15'},
+      {id: 'id-2', name: 'Antonio Linuvui', number: '444-14-14'},
+      {id: 'id-3', name: 'Marusia Nechemna', number: '666-55-44'},
+    ],
+    filter: '',
   }
 
   deleteContact = (id) => {
@@ -50,8 +46,9 @@ export class App extends Component {
       filter
     })
   }
-
+  
   render () {
+    const filteredContacts = this.getFilteredContacts()
     return (
       <div>
       <Section title="Phonebook">
@@ -59,7 +56,7 @@ export class App extends Component {
       </Section>
       <Section title="Contacts">
         <FilterForm filter={this.state.filter} setFilter={this.setFilter}/>
-        <ContactList contacts={this.getFilteredContacts()} deleteContact={this.deleteContact}/>
+        <ContactList contacts={filteredContacts} deleteContact={this.deleteContact}/>
       </Section>
     </div>
     )

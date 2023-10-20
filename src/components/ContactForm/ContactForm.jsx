@@ -2,13 +2,9 @@ import { Component } from 'react'
 import styles from './contactForm.module.css'
 
 class ContactForm extends Component  {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      name: '',
-      number: ''
-    };
+  state = {
+    name: '',
+    number: ''
   }
 
   resetForm = () => {
@@ -29,15 +25,9 @@ class ContactForm extends Component  {
     this.resetForm()
   }
 
-  onNameChange = (e) => {
+  onChange = (e, property) => {
     this.setState({
-      name: e.target.value
-    })
-  }
-
-  onNumberChange = (e) => {
-    this.setState({
-      number: e.target.value
+      [property]: e.target.value
     })
   }
 
@@ -46,11 +36,11 @@ class ContactForm extends Component  {
       <form className={styles['contact-form']}>
       <div>
         <label htmlFor="name">Name</label>
-        <input value={this.state.name} type="text" name="name" required onChange={this.onNameChange}/>
+        <input value={this.state.name} type="text" name="name" required onChange={(e) => this.onChange(e, 'name')}/>
       </div>
       <div>
         <label htmlFor="number">Number</label>
-        <input value={this.state.number} type="tel" name="number" required onChange={this.onNumberChange}/>
+        <input value={this.state.number} type="tel" name="number" required onChange={(e) => this.onChange(e, 'number')}/>
       </div>
 
       <button className={styles['contact-button']} type="button" onClick={this.onAddContactClick}>Add</button>

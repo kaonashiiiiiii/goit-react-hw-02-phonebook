@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { ContactForm, FilterForm, Section, ContactList } from "."
 
 export const App = () => {
@@ -36,13 +36,13 @@ export const App = () => {
     }))
   }
 
-  const filteredContacts = useMemo(function () {
+  const filteredContacts = function () {
     return state.contacts.filter(contact => {
       if(!state.filter) return true
       if (contact.name.toLowerCase().includes(state.filter)) return true
       return false
     })
-  }, [state.filter, state.contacts])
+  }
 
   function setFilter (filter) {
     setState(prevState => ({
